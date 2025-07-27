@@ -1,5 +1,7 @@
 # LCH Markdown Code Runner
 
+源码：https://github.com/Q1143316492/LCHMarkdownCodeRunner
+
 LCH Markdown Code Runner 是一个用于在 VS Code 中直接运行 Markdown 文件中代码块的扩展。支持多种编程语言，适用于文档、教程和代码示例的快速验证。
 
 ## 特性
