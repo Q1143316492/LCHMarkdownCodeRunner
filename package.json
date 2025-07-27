@@ -2,7 +2,7 @@
   "name": "lch-markdown-code-runner",
   "displayName": "LCH Markdown Code Runner",
   "description": "Run Python code blocks in Markdown with custom GM directives",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Q1143316492/LCHMarkdownCodeRunner.git"
@@ -35,7 +35,6 @@
             "GM": {
               "scriptPath": "test/test_script.py",
               "commandTemplate": "python {scriptPath} {args}",
-              "directMode": false,
               "passCodeAsStdin": true,
               "passCodeAsFile": false,
               "timeout": 30000
@@ -52,10 +51,6 @@
               "commandTemplate": {
                 "type": "string",
                 "description": "Command template for execution"
-              },
-              "directMode": {
-                "type": "boolean",
-                "description": "Execute Python code directly"
               },
               "passCodeAsStdin": {
                 "type": "boolean",

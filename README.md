@@ -44,7 +44,6 @@ code --install-extension lch-markdown-code-runner-0.0.3.vsix
     "GM": {
       "scriptPath": "scripts/test_runner.py",
       "commandTemplate": "python {scriptPath} {args}",
-      "directMode": false,
       "passCodeAsStdin": true,
       "passCodeAsFile": false,
       "timeout": 30000
@@ -52,7 +51,6 @@ code --install-extension lch-markdown-code-runner-0.0.3.vsix
     "GM_API": {
       "scriptPath": "scripts/api_tester.py", 
       "commandTemplate": "python {scriptPath} --endpoint {endpoint} --env {env}",
-      "directMode": false,
       "passCodeAsStdin": true,
       "passCodeAsFile": false,
       "timeout": 15000
@@ -60,7 +58,6 @@ code --install-extension lch-markdown-code-runner-0.0.3.vsix
     "GM_DATA": {
       "scriptPath": "scripts/data_processor.py",
       "commandTemplate": "python {scriptPath} --source {source} --format {format}",
-      "directMode": false,
       "passCodeAsStdin": true,
       "passCodeAsFile": false,
       "timeout": 60000
@@ -120,9 +117,6 @@ print(f"Executing query: {query}")
 - **commandTemplate**: 命令执行模板，支持变量替换
   - `{scriptPath}`: 脚本路径
   - `{args}`: 从 GM 注解解析的参数
-- **directMode**: 
-  - `false`: 通过脚本处理（推荐）
-  - `true`: 直接执行代码
 - **passCodeAsStdin**: 通过标准输入传递代码（推荐）
 - **passCodeAsFile**: 通过临时文件传递代码
 - **timeout**: 执行超时时间（毫秒）

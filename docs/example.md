@@ -10,7 +10,6 @@
       "GM": {
           "scriptPath": "test/test_script.py",
           "commandTemplate": "python {scriptPath} {args}",
-          "directMode": false,
           "passCodeAsStdin": true,
           "passCodeAsFile": false,
           "timeout": 15000
@@ -18,7 +17,6 @@
       "GM2": {
           "scriptPath": "test/gm2_data_analysis.py",
           "commandTemplate": "python {scriptPath} {args}",
-          "directMode": false,
           "passCodeAsStdin": true,
           "passCodeAsFile": false,
           "timeout": 20000
@@ -26,7 +24,6 @@
       "GM3": {
           "scriptPath": "test/gm3_web_service.py", 
           "commandTemplate": "python {scriptPath} {args}",
-          "directMode": false,
           "passCodeAsStdin": true,
           "passCodeAsFile": false,
           "timeout": 25000
@@ -54,11 +51,6 @@
   - 作用：是否将代码保存为临时文件传递。
   - 当为 `true` 时：代码会保存到临时文件，文件路径通过 `--code-file` 参数传递给脚本，脚本读取并执行。
   - 优点：适合需要文件路径的场景。
-
-- **directMode**
-  - 作用：是否直接执行代码（跳过脚本）。
-  - 当为 `true` 时：直接执行 Python 代码，不调用 `scriptPath` 脚本。
-  - 当为 `false` 时：通过配置的脚本来处理代码。
 
 > **注意**：`passCodeAsStdin` 和 `passCodeAsFile` 只需启用其中一个，一般推荐用 `passCodeAsStdin`。
 

@@ -15,7 +15,6 @@
         "GM": {
             "scriptPath": "test/test_script.py",
             "commandTemplate": "python {scriptPath} {args}",
-            "directMode": false,
             "passCodeAsStdin": true,
             "passCodeAsFile": false,
             "timeout": 15000
@@ -23,7 +22,6 @@
         "GM2": {
             "scriptPath": "test/gm2_data_analysis.py",
             "commandTemplate": "python {scriptPath} {args}",
-            "directMode": false,
             "passCodeAsStdin": true,
             "passCodeAsFile": false,
             "timeout": 20000
@@ -31,7 +29,6 @@
         "GM3": {
             "scriptPath": "test/gm3_web_service.py", 
             "commandTemplate": "python {scriptPath} {args}",
-            "directMode": false,
             "passCodeAsStdin": true,
             "passCodeAsFile": false,
             "timeout": 25000

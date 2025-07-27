@@ -37,7 +37,7 @@ class MarkdownCodeLensProvider implements vscode.CodeLensProvider {
             if (block.gmDirective) {
                 const range = new vscode.Range(block.gmDirective.line, 0, block.gmDirective.line, 0);
                 const command: vscode.Command = {
-                    title: '▶️ Run Python Code',
+                    title: '▶️ Run Code',
                     command: 'lch-markdown-code-runner.runPythonCode',
                     arguments: [document, block]
                 };
@@ -91,7 +91,6 @@ class MarkdownCodeLensProvider implements vscode.CodeLensProvider {
             'GM': {
                 scriptPath: 'test/test_script.py',
                 commandTemplate: 'python {scriptPath} {args}',
-                directMode: false,
                 passCodeAsStdin: true,
                 passCodeAsFile: false,
                 timeout: 30000
@@ -197,7 +196,6 @@ async function runPythonCode(document: vscode.TextDocument, block: PythonCodeBlo
         'GM': {
             scriptPath: 'test/test_script.py',
             commandTemplate: 'python {scriptPath} {args}',
-            directMode: false,
             passCodeAsStdin: true,
             passCodeAsFile: false,
             timeout: 30000
@@ -216,7 +214,6 @@ async function runPythonCode(document: vscode.TextDocument, block: PythonCodeBlo
     const scriptPath = gmConfig.scriptPath || 'test/test_script.py';
     const commandTemplate = gmConfig.commandTemplate || 'python {scriptPath} {args}';
     const timeout = gmConfig.timeout || 30000;
-    const directMode = gmConfig.directMode || false;
     const passCodeAsStdin = gmConfig.passCodeAsStdin || false;
     const passCodeAsFile = gmConfig.passCodeAsFile || false;
 
@@ -260,12 +257,10 @@ async function runPythonCode(document: vscode.TextDocument, block: PythonCodeBlo
 
         // Check execution mode priority:
         // 1. GM directive parameter: direct=true
-        // 2. GM directive argument: 'direct'  
-        // 3. Global configuration: directMode
+        // 2. GM directive argument: 'direct'
         const shouldExecuteDirect = 
             block.gmDirective.params['direct'] === 'true' ||
-            block.gmDirective.args.includes('direct') || 
-            directMode;
+            block.gmDirective.args.includes('direct');
 
         outputChannel.appendLine('Code to execute:');
         outputChannel.appendLine('─'.repeat(30));
