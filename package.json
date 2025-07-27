@@ -1,6 +1,7 @@
 {
   "name": "lch-markdown-code-runner",
   "displayName": "LCH Markdown Code Runner",
+  "publisher": "Weylochen",
   "description": "Run Python code blocks in Markdown with custom GM directives",
   "version": "1.0.0",
   "repository": {
