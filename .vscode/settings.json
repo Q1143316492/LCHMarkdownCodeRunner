@@ -1,0 +1,40 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "files.exclude": {
+        "out": false, // set this to true to hide the "out" folder with the compiled JS files
+        "dist": false // set this to true to hide the "dist" folder with the compiled JS files
+    },
+    "search.exclude": {
+        "out": true, // set this to false to include "out" folder in search results
+        "dist": true // set this to false to include "dist" folder in search results
+    },
+    // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
+    "typescript.tsc.autoDetect": "off",
+    // LCH Markdown Code Runner settings for testing
+    "lchMarkdownCodeRunner.gmConfigs": {
+        "GM": {
+            "scriptPath": "test/test_script.py",
+            "commandTemplate": "python {scriptPath} {args}",
+            "directMode": false,
+            "passCodeAsStdin": true,
+            "passCodeAsFile": false,
+            "timeout": 15000
+        },
+        "GM2": {
+            "scriptPath": "test/gm2_data_analysis.py",
+            "commandTemplate": "python {scriptPath} {args}",
+            "directMode": false,
+            "passCodeAsStdin": true,
+            "passCodeAsFile": false,
+            "timeout": 20000
+        },
+        "GM3": {
+            "scriptPath": "test/gm3_web_service.py", 
+            "commandTemplate": "python {scriptPath} {args}",
+            "directMode": false,
+            "passCodeAsStdin": true,
+            "passCodeAsFile": false,
+            "timeout": 25000
+        }
+    }
+}

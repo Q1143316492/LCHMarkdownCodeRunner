@@ -1,0 +1,105 @@
+{
+  "name": "lch-markdown-code-runner",
+  "displayName": "LCH Markdown Code Runner",
+  "description": "Run Python code blocks in Markdown with custom GM directives",
+  "version": "0.0.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Q1143316492/LCHMarkdownCodeRunner.git"
+  },
+  "engines": {
+    "vscode": "^1.102.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "lch-markdown-code-runner.runPythonCode",
+        "title": "Run Python Code",
+        "icon": "$(play)"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "LCH Markdown Code Runner",
+      "properties": {
+        "lchMarkdownCodeRunner.gmConfigs": {
+          "type": "object",
+          "default": {
+            "GM": {
+              "scriptPath": "test/test_script.py",
+              "commandTemplate": "python {scriptPath} {args}",
+              "directMode": false,
+              "passCodeAsStdin": true,
+              "passCodeAsFile": false,
+              "timeout": 30000
+            }
+          },
+          "description": "Configuration for different GM identifiers. Each key is a GM identifier (e.g., 'GM', 'GM2'), and each value contains the configuration for that identifier.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "scriptPath": {
+                "type": "string",
+                "description": "Path to the Python script or interpreter"
+              },
+              "commandTemplate": {
+                "type": "string",
+                "description": "Command template for execution"
+              },
+              "directMode": {
+                "type": "boolean",
+                "description": "Execute Python code directly"
+              },
+              "passCodeAsStdin": {
+                "type": "boolean",
+                "description": "Pass code content via stdin"
+              },
+              "passCodeAsFile": {
+                "type": "boolean",
+                "description": "Save code to temporary file"
+              },
+              "timeout": {
+                "type": "number",
+                "description": "Execution timeout in milliseconds"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.102.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "esbuild": "^0.25.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.3",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
