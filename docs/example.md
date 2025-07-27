@@ -17,8 +17,8 @@
       "GM2": {
           "scriptPath": "test/test_script_ex.py",
           "commandTemplate": "python {scriptPath} {args}",
-          "passCodeAsStdin": true,
-          "passCodeAsFile": false,
+          "passCodeAsStdin": false,
+          "passCodeAsFile": true,
           "timeout": 20000
       }
   },
@@ -66,7 +66,7 @@ print(f"Test #GM2 Args: {sys.argv}")
 ```python
 #GM[direct]
 import sys
-print("sys.argv:", sys.argv)
+print("aaa sys.argv:", sys.argv)
 ```
 
 ## 无GM指令的代码块

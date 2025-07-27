@@ -22,8 +22,8 @@
         "GM2": {
             "scriptPath": "test/test_script_ex.py",
             "commandTemplate": "python {scriptPath} {args}",
-            "passCodeAsStdin": true,
-            "passCodeAsFile": false,
+            "passCodeAsStdin": false,
+            "passCodeAsFile": true,
             "timeout": 20000
         }
     }
