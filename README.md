@@ -4,11 +4,15 @@
 
 LCH Markdown Code Runner 是一个用于在 VS Code 中直接运行 Markdown 文件中代码块的扩展。支持多种编程语言，适用于文档、教程和代码示例的快速验证。
 
-## 特性
-- 识别并运行 Markdown 文件中的代码块
-- 支持多种主流编程语言
-- 运行结果直接嵌入 Markdown 文档
-- 简单易用，适合开发者和文档作者
+## 功能与示例
+
+```python
+#GM[port=8080, debug=true]
+eval(print("Hello, World!"))
+```
+插件支持配置了GM对应某个python脚本gm.py。markdown代码块上方会多一个运行按钮。点击运行会把参数port,debug,markdown文本内容传递给该脚本，并运行。这样就能够做很多事情。
+
+初衷是我有一个游戏，他支持以http的形式接收一段GM指令。那我就能用这个插件打通文档到指令的一键执行。
 
 ## 安装
 1. 在 VS Code 扩展市场搜索并安装 `LCH Markdown Code Runner`
