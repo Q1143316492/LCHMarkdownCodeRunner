@@ -87,15 +87,7 @@ class MarkdownCodeLensProvider implements vscode.CodeLensProvider {
 
     private findGMDirective(content: string, startLine: number): GMDirective | null {
         const config = vscode.workspace.getConfiguration('lchMarkdownCodeRunner');
-        const gmConfigs = config.get<{ [key: string]: any }>('gmConfigs', {
-            'GM': {
-                scriptPath: 'test/test_script.py',
-                commandTemplate: 'python {scriptPath} {args}',
-                passCodeAsStdin: true,
-                passCodeAsFile: false,
-                timeout: 30000
-            }
-        });
+        const gmConfigs = config.get<{ [key: string]: any }>('gmConfigs', {});
         
         const lines = content.split('\n');
         
@@ -104,7 +96,8 @@ class MarkdownCodeLensProvider implements vscode.CodeLensProvider {
             
             // 检查所有配置的GM标识符
             for (const gmIdentifier of Object.keys(gmConfigs)) {
-                const gmPattern = new RegExp(`^#\\s*${gmIdentifier}(?:\\[([^\\]]+)\\])?`);
+                // 修改正则表达式，确保GM标识符是完整匹配，后面必须是 [ 或行结束
+                const gmPattern = new RegExp(`^#\\s*${gmIdentifier}(?=\\[|$)(?:\\[([^\\]]+)\\])?`);
                 const match = line.match(gmPattern);
                 
                 if (match) {
@@ -192,37 +185,43 @@ async function runPythonCode(document: vscode.TextDocument, block: PythonCodeBlo
     }
 
     const config = vscode.workspace.getConfiguration('lchMarkdownCodeRunner');
-    const gmConfigs = config.get<{ [key: string]: any }>('gmConfigs', {
-        'GM': {
-            scriptPath: 'test/test_script.py',
-            commandTemplate: 'python {scriptPath} {args}',
-            passCodeAsStdin: true,
-            passCodeAsFile: false,
-            timeout: 30000
-        }
-    });
+    const gmConfigs = config.get<{ [key: string]: any }>('gmConfigs', {});
 
-    // 获取当前GM标识符对应的配置
-    const gmIdentifier = block.gmDirective.gmIdentifier;
-    const gmConfig = gmConfigs[gmIdentifier];
-    
-    if (!gmConfig) {
-        outputChannel.appendLine(`❌ 未找到 ${gmIdentifier} 的配置`);
-        return;
-    }
-
-    const scriptPath = gmConfig.scriptPath || 'test/test_script.py';
-    const commandTemplate = gmConfig.commandTemplate || 'python {scriptPath} {args}';
-    const timeout = gmConfig.timeout || 30000;
-    const passCodeAsStdin = gmConfig.passCodeAsStdin || false;
-    const passCodeAsFile = gmConfig.passCodeAsFile || false;
-
+    // 添加调试信息
     outputChannel.clear();
     outputChannel.show();
     outputChannel.appendLine('='.repeat(50));
     outputChannel.appendLine(`Running Python code from ${document.fileName}`);
+    // outputChannel.appendLine(`Debug: Read gmConfigs from configuration:`);
+    // outputChannel.appendLine(JSON.stringify(gmConfigs, null, 2));
+    
+    // 获取当前GM标识符对应的配置
+    const gmIdentifier = block.gmDirective.gmIdentifier;
+    // outputChannel.appendLine(`Debug: Looking for GM identifier: ${gmIdentifier}`);
+    
+    const gmConfig = gmConfigs[gmIdentifier];
+    
+    if (!gmConfig) {
+        outputChannel.appendLine(`❌ 未找到 ${gmIdentifier} 的配置`);
+        outputChannel.appendLine(`Available GM identifiers: ${Object.keys(gmConfigs).join(', ')}`);
+        return;
+    }
+    
+    // outputChannel.appendLine(`Debug: Found config for ${gmIdentifier}:`);
+    outputChannel.appendLine(JSON.stringify(gmConfig, null, 2));
+
+    const scriptPath = gmConfig.scriptPath;
+    const commandTemplate = gmConfig.commandTemplate || 'python {scriptPath} {args}';
+    const timeout = gmConfig.timeout || 30000;
+    const passCodeAsStdin = gmConfig.passCodeAsStdin !== undefined ? gmConfig.passCodeAsStdin : true;
+    const passCodeAsFile = gmConfig.passCodeAsFile !== undefined ? gmConfig.passCodeAsFile : false;
+
     outputChannel.appendLine(`GM Identifier: ${gmIdentifier}`);
     outputChannel.appendLine(`Script Path: ${scriptPath}`);
+    outputChannel.appendLine(`Command Template: ${commandTemplate}`);
+    outputChannel.appendLine(`Pass Code As Stdin: ${passCodeAsStdin}`);
+    outputChannel.appendLine(`Pass Code As File: ${passCodeAsFile}`);
+    outputChannel.appendLine(`Timeout: ${timeout}`);
     outputChannel.appendLine(`GM Directive args: ${JSON.stringify(block.gmDirective.args)}`);
     outputChannel.appendLine(`GM Directive params: ${JSON.stringify(block.gmDirective.params)}`);
     outputChannel.appendLine('='.repeat(50));
