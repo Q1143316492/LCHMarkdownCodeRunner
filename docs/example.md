@@ -15,18 +15,11 @@
           "timeout": 15000
       },
       "GM2": {
-          "scriptPath": "test/gm2_data_analysis.py",
+          "scriptPath": "test/test_script_ex.py",
           "commandTemplate": "python {scriptPath} {args}",
           "passCodeAsStdin": true,
           "passCodeAsFile": false,
           "timeout": 20000
-      },
-      "GM3": {
-          "scriptPath": "test/gm3_web_service.py", 
-          "commandTemplate": "python {scriptPath} {args}",
-          "passCodeAsStdin": true,
-          "passCodeAsFile": false,
-          "timeout": 25000
       }
   },
 }
@@ -58,50 +51,22 @@
 
 ```python
 #GM[port=8080, debug=true]
-print("GM basic test")
-print(f"Port: 8080")
-print(f"Debug mode: True")
 import sys
-print(f"Args: {sys.argv}")
+print(f"Test #GM Args: {sys.argv}")
 ```
 
-## GM2 - 数据分析脚本
-
 ```python
-#GM2[dataset=sales, format=json, verbose=true]
-print("Starting data analysis")
-print(f"Dataset: {dataset}")
-print(f"Output format: {output_format}")
-print(f"Verbose mode: {verbose}")
-
-# Simulate data analysis
-data = [1, 2, 3, 4, 5]
-result = sum(data) / len(data)
-print(f"Average: {result}")
-```
-
-## GM3 - Web服务脚本
-
-```python
-#GM3[port=9000, host=0.0.0.0, env=production]
-print("Web service configuration")
+#GM2[port=8080, debug=true]
 import sys
-print(f"args: {sys.argv}")
-# Simulate simple HTTP server setup
-print("Setting up routes...")
-print("Configuring middleware...")
-print("Web service ready!")
+print(f"Test #GM2 Args: {sys.argv}")
 ```
 
 ## GM - 直接执行模式测试
 
 ```python
 #GM[direct]
-print("GM direct execution mode")
-import datetime
-print(f"Current time: {datetime.datetime.now()}")
-for i in range(3):
-    print(f"Count: {i + 1}")
+import sys
+print("sys.argv:", sys.argv)
 ```
 
 ## 无GM指令的代码块
@@ -116,7 +81,6 @@ print("Because there's no corresponding GM identifier configured")
 当前配置支持以下GM标识符：
 
 - **GM**: 使用 `test/test_script.py`，适用于基础测试
-- **GM2**: 使用 `test/gm2_data_analysis.py`，适用于数据分析
-- **GM3**: 使用 `test/gm3_web_service.py`，适用于Web服务
+- **GM2**: 使用 `test/test_script_ex.py`，适用于扩展测试
 
 每个GM配置都有独立的脚本路径、命令模板和超时设置。

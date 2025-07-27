@@ -31,7 +31,7 @@ LCH Markdown Code Runner 是一个 VS Code 扩展，允许你在 Markdown 文档
 # 搜索 "LCH Markdown Code Runner"
 
 # 方式2: 手动安装
-code --install-extension lch-markdown-code-runner-0.0.3.vsix
+code --install-extension lch-markdown-code-runner.vsix
 ```
 
 ### 配置
