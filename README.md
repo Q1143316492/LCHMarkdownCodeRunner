@@ -19,7 +19,7 @@ And the following in your `settings.json`:
 ```json
 "lchMarkdownCodeRunner.gmConfigs": {
     "GM": {
-        "scriptPath": "[test/test_script.py](test/test_script.py)",
+        "scriptPath": "test/test_script.py",
         "commandTemplate": "python {scriptPath} {args}",
         "passCodeAsStdin": true,
         "passCodeAsFile": false,
@@ -28,13 +28,13 @@ And the following in your `settings.json`:
 }
 ```
 
-This will call the [`test/test_script.py`](test/test_script.py) script, passing `--port=8080 --debug=true` as arguments, and the code block content via stdin.
+This will call the `test/test_script.py` script, passing `--port=8080 --debug=true` as arguments, and the code block content via stdin.
 
 The matching rule is `#GM[...]`, where `GM` is the config name and `[...]` is parsed as arguments. It supports both `[port=8080, debug=true]` and `[8080, true]` formats.
 
 Matching code blocks will display a "Run" button above them. Clicking it executes the code block, making your documentation highly interactive.
 
-Example [`test/test_script.py`](test/test_script.py):
+Example `test/test_script.py`:
 
 ```python
 #!/usr/bin/env python3
