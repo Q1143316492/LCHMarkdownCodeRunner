@@ -1,28 +1,121 @@
+
 # LCH Markdown Code Runner
 
-源码：https://github.com/Q1143316492/LCHMarkdownCodeRunner
+## Introduction
 
-LCH Markdown Code Runner 是一个用于在 VS Code 中直接运行 Markdown 文件中代码块的扩展。支持多种编程语言，适用于文档、教程和代码示例的快速验证。
+Source code: [https://github.com/Q1143316492/LCHMarkdownCodeRunner](https://github.com/Q1143316492/LCHMarkdownCodeRunner)
 
-## 功能与示例
+LCH Markdown Code Runner is a VS Code extension that allows you to run code blocks directly from Markdown files.
+
+For example, given the following content in a Markdown file:
 
 ```python
 #GM[port=8080, debug=true]
-eval(print("Hello, World!"))
+eval('print("Hello, World!")')
 ```
-插件支持配置了GM对应某个python脚本gm.py。markdown代码块上方会多一个运行按钮。点击运行会把参数port,debug,markdown文本内容传递给该脚本，并运行。这样就能够做很多事情。
 
-初衷是我有一个游戏，他支持以http的形式接收一段GM指令。那我就能用这个插件打通文档到指令的一键执行。
+And the following in your `settings.json`:
 
-## 安装
-1. 在 VS Code 扩展市场搜索并安装 `LCH Markdown Code Runner`
-2. 或下载 `.vsix` 文件手动安装
+```json
+"lchMarkdownCodeRunner.gmConfigs": {
+    "GM": {
+        "scriptPath": "[test/test_script.py](test/test_script.py)",
+        "commandTemplate": "python {scriptPath} {args}",
+        "passCodeAsStdin": true,
+        "passCodeAsFile": false,
+        "timeout": 15000
+    }
+}
+```
 
-## 使用方法
-1. 打开包含代码块的 Markdown 文件
-2. 选中代码块或将光标放在代码块内
-3. 右键选择“运行代码块”或使用命令面板执行相关命令
+This will call the [`test/test_script.py`](test/test_script.py) script, passing `--port=8080 --debug=true` as arguments, and the code block content via stdin.
 
-## 许可协议
+The matching rule is `#GM[...]`, where `GM` is the config name and `[...]` is parsed as arguments. It supports both `[port=8080, debug=true]` and `[8080, true]` formats.
+
+Matching code blocks will display a "Run" button above them. Clicking it executes the code block, making your documentation highly interactive.
+
+Example [`test/test_script.py`](test/test_script.py):
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# test_script.py
+
+import sys
+import argparse
+import os
+
+def main():
+    print("\n🟦🟦🟦 BEGIN {} 🟦🟦🟦\n".format(os.path.basename(__file__)))
+    print("🚩  Python Markdown Runner")
+    print("🟢 Args:")
+    print("   ", sys.argv)
+
+    if not sys.stdin.isatty():
+        code = sys.stdin.read()
+        if code.strip():
+            print("\n⭐ Markdown Code Content:")
+            print(code)
+            print("\n⭐ Exec:")
+            exec(code)
+    print("\n🟦🟦🟦 END 🟦🟦🟦\n")
+
+if __name__ == "__main__":
+    main()
+```
+
+Sample output:
+
+```
+==================================================
+Running Python code from e:\LCHMarkdownCodeRunner\README.md
+{
+  "scriptPath": "test/test_script.py",
+  "commandTemplate": "python {scriptPath} {args}",
+  "passCodeAsStdin": true,
+  "passCodeAsFile": false,
+  "timeout": 15000
+}
+GM Identifier: GM
+Script Path: test/test_script.py
+Command Template: python {scriptPath} {args}
+Pass Code As Stdin: true
+Pass Code As File: false
+Timeout: 15000
+GM Directive args: []
+GM Directive params: {"port":"8080","debug":"true"}
+==================================================
+Code to execute:
+──────────────────────────────
+eval('print("Hello, World!")')
+──────────────────────────────
+Executing: python test/test_script.py --port=8080 --debug=true
+
+🟦🟦🟦 BEGIN test_script.py 🟦🟦🟦
+
+🚩  Python Markdown Runner
+🟢 Args:
+    ['test/test_script.py', '--port=8080', '--debug=true']
+
+⭐ Markdown Code Content:
+eval('print("Hello, World!")')
+
+⭐ Exec:
+Hello, World!
+
+🟦🟦🟦 END 🟦🟦🟦
+
+──────────────────────────────────────────────────
+Process exited with code: 0
+✅ Execution completed successfully
+```
+
+## Installation
+
+1. Search for `LCH Markdown Code Runner` in the VS Code Extensions Marketplace and install it.
+2. Or download the `.vsix` file and install manually.
+
+## License
+
 MIT License
 
