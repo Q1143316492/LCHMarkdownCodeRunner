@@ -110,6 +110,57 @@ Process exited with code: 0
 ✅ Execution completed successfully
 ```
 
+## Configuration
+
+### GM Configurations
+
+Configure different GM identifiers in your VS Code settings:
+
+```json
+"lchMarkdownCodeRunner.gmConfigs": {
+    "GM": {
+        "scriptPath": "test/test_script.py",
+        "commandTemplate": "python {scriptPath} {args}",
+        "passCodeAsStdin": true,
+        "passCodeAsFile": false,
+        "timeout": 15000
+    },
+    "GM2": {
+        "scriptPath": "another_script.py",
+        "commandTemplate": "python {scriptPath} {args}",
+        "passCodeAsStdin": false,
+        "passCodeAsFile": true,
+        "timeout": 30000
+    }
+}
+```
+
+### Run Button Customization
+
+You can customize the appearance of the run button:
+
+#### Run Button Text
+Set custom text for the run button:
+```json
+"lchMarkdownCodeRunner.runButtonText": "🚀 Execute Code"
+```
+
+#### Run Button Icon
+Choose from various icons for the run button:
+```json
+"lchMarkdownCodeRunner.runButtonIcon": "🚀"
+```
+
+Available icons: `▶️`, `🚀`, `⚡`, `🔥`, `💫`, `🎯`, `⭐`, `🌟`, `✨`, `🎪`, `🎨`, `🎭`, `🎲`, `🎊`, `🎉`
+
+**Note**: If you set a custom `runButtonText`, it will override the icon setting. If you only set the `runButtonIcon`, it will be combined with the default text "Run Code".
+
+### Configuration Priority
+
+- If `runButtonText` is customized: Uses the custom text exactly as specified
+- If only `runButtonIcon` is set: Uses the selected icon + "Run Code"
+- If neither is set: Uses the default "▶️ Run Code"
+
 ## Installation
 
 1. Search for `LCH Markdown Code Runner` in the VS Code Extensions Marketplace and install it.

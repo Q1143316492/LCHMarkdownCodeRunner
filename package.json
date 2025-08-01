@@ -4,7 +4,7 @@
   "publisher": "Weylochen",
   "description": "Run Python code blocks in Markdown with custom GM directives",
   "icon": "icon.png",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/Q1143316492/LCHMarkdownCodeRunner.git"
@@ -68,6 +68,17 @@
               }
             }
           }
+        },
+        "lchMarkdownCodeRunner.runButtonText": {
+          "type": "string",
+          "default": "▶️ Run Code",
+          "description": "Custom text for the run button"
+        },
+        "lchMarkdownCodeRunner.runButtonIcon": {
+          "type": "string",
+          "default": "▶️",
+          "enum": ["▶️", "🚀", "⚡", "🔥", "💫", "🎯", "⭐", "🌟", "✨", "🎪", "🎨", "🎭", "🎪", "🎲", "🎯", "🎊", "🎉"],
+          "description": "Icon for the run button"
         }
       }
     }

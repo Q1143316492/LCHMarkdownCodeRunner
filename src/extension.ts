@@ -36,8 +36,16 @@ class MarkdownCodeLensProvider implements vscode.CodeLensProvider {
         for (const block of codeBlocks) {
             if (block.gmDirective) {
                 const range = new vscode.Range(block.gmDirective.line, 0, block.gmDirective.line, 0);
+                // 从配置中获取按钮文本和图标
+                const config = vscode.workspace.getConfiguration('lchMarkdownCodeRunner');
+                const customText = config.get<string>('runButtonText', '▶️ Run Code');
+                const customIcon = config.get<string>('runButtonIcon', '▶️');
+                
+                // 如果用户设置了自定义文本，使用自定义文本；否则使用图标+默认文本
+                const buttonTitle = customText !== '▶️ Run Code' ? customText : `${customIcon} Run Code`;
+                
                 const command: vscode.Command = {
-                    title: '▶️ Run Code',
+                    title: buttonTitle,
                     command: 'lch-markdown-code-runner.runPythonCode',
                     arguments: [document, block]
                 };

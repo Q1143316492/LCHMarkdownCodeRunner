@@ -11,6 +11,7 @@
     // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
     "typescript.tsc.autoDetect": "off",
     // LCH Markdown Code Runner settings for testing
+    "lchMarkdownCodeRunner.runButtonIcon": "🚀",
     "lchMarkdownCodeRunner.gmConfigs": {
         "GM": {
             "scriptPath": "test/test_script.py",
