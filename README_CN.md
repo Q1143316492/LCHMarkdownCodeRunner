@@ -1,20 +1,19 @@
+# LCH Markdown 代码运行器
 
-# LCH Markdown Code Runner
+## 简介
 
-## Introduction
+源代码: [LCHMarkdownCodeRunner](https://github.com/Q1143316492/LCHMarkdownCodeRunner)
 
-Source code: [LCHMarkdownCodeRunner](https://github.com/Q1143316492/LCHMarkdownCodeRunner)
+LCH Markdown Code Runner 是一个 VS Code 扩展，允许您直接从 Markdown 文件运行代码块。
 
-LCH Markdown Code Runner is a VS Code extension that allows you to run code blocks directly from Markdown files.
-
-For example, given the following content in a Markdown file:
+例如，在 Markdown 文件中有以下内容：
 
 ```python
 #GM[port=8080, debug=true]
 eval('print("Hello, World!")')
 ```
 
-And the following in your `settings.json`:
+以及 `settings.json` 中的以下内容：
 
 ```json
 "lchMarkdownCodeRunner.gmConfigs": {
@@ -28,13 +27,13 @@ And the following in your `settings.json`:
 }
 ```
 
-This will call the `test/test_script.py` script, passing `--port=8080 --debug=true` as arguments, and the code block content via stdin.
+这将调用 `test/test_script.py` 脚本，传递 `--port=8080 --debug=true` 作为参数，并通过 stdin 传递代码块内容。
 
-The matching rule is `#GM[...]`, where `GM` is the config name and `[...]` is parsed as arguments. It supports both `[port=8080, debug=true]` and `[8080, true]` formats.
+匹配规则是 `#GM[...]`，其中 `GM` 是配置名称，`[...]` 被解析为参数。它支持 `[port=8080, debug=true]` 和 `[8080, true]` 两种格式。
 
-Matching code blocks will display a "Run" button above them. Clicking it executes the code block, making your documentation highly interactive.
+匹配的代码块上方会显示一个“Run”按钮。点击它会执行代码块，使您的文档具有高度的交互性。
 
-Example `test/test_script.py`:
+示例 `test/test_script.py`:
 
 ```python
 #!/usr/bin/env python3
@@ -64,7 +63,7 @@ if __name__ == "__main__":
     main()
 ```
 
-Sample output:
+示例输出:
 
 ```
 ==================================================
@@ -110,11 +109,11 @@ Process exited with code: 0
 ✅ Execution completed successfully
 ```
 
-## Configuration
+## 配置
 
-### GM Configurations
+### GM 配置
 
-Configure different GM identifiers in your VS Code settings:
+在您的 VS Code 设置中配置不同的 GM 标识符：
 
 ```json
 "lchMarkdownCodeRunner.gmConfigs": {
@@ -142,42 +141,41 @@ Configure different GM identifiers in your VS Code settings:
 }
 ```
 
-### Run Button Customization
+### 运行按钮自定义
 
-You can customize the appearance of the run button:
+您可以自定义运行按钮的外观：
 
-#### Run Button Text
-Set custom text for the run button:
+#### 运行按钮文本
+为运行按钮设置自定义文本：
 ```json
-"lchMarkdownCodeRunner.runButtonText": "🚀 Execute Code"
+"lchMarkdownCodeRunner.runButtonText": "🚀 执行代码"
 ```
 
-#### Run Button Icon
-Choose from various icons for the run button:
+#### 运行按钮图标
+为运行按钮选择各种图标：
 ```json
 "lchMarkdownCodeRunner.runButtonIcon": "🚀"
 ```
 
-Available icons: `▶️`, `🚀`, `⚡`, `🔥`, `💫`, `🎯`, `⭐`, `🌟`, `✨`, `🎪`, `🎨`, `🎭`, `🎲`, `🎊`, `🎉`
+可用图标: `▶️`, `🚀`, `⚡`, `🔥`, `💫`, `🎯`, `⭐`, `🌟`, `✨`, `🎪`, `🎨`, `🎭`, `🎲`, `🎊`, `🎉`
 
-**Note**: If you set a custom `runButtonText`, it will override the icon setting. If you only set the `runButtonIcon`, it will be combined with the default text "Run Code".
+**注意**: 如果您设置了自定义的 `runButtonText`，它将覆盖图标设置。如果您只设置了 `runButtonIcon`，它将与默认文本 "Run Code" 结合使用。
 
-### Configuration Priority
+### 配置优先级
 
-- If `runButtonText` is customized: Uses the custom text exactly as specified
-- If only `runButtonIcon` is set: Uses the selected icon + "Run Code"
-- If neither is set: Uses the default "▶️ Run Code"
+- 如果 `runButtonText` 已自定义：完全按照指定使用自定义文本
+- 如果只设置了 `runButtonIcon`：使用所选图标 + "Run Code"
+- 如果两者都未设置：使用默认的 "▶️ Run Code"
 
-## Installation
+## 安装
 
-1. Search for `LCH Markdown Code Runner` in the VS Code Extensions Marketplace and install it.
-2. Or download the `.vsix` file and install manually.
+1. 在 VS Code 扩展市场中搜索 `LCH Markdown Code Runner` 并安装。
+2. 或者下载 `.vsix` 文件并手动安装。
 
-## more Examples
+## 更多示例
 
-For an advanced example of how to set up an HTTP gateway to send commands to a running application, see the [HTTP Gateway Example](./http_gateway/README.md).
+有关如何设置HTTP网关以向正在运行的应用程序发送命令的高级示例，请参阅[HTTP网关示例](./http_gateway/README.md)。
 
-## License
+## 许可证
 
-MIT License
-
+MIT 许可证

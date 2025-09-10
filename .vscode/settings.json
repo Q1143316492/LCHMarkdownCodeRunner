@@ -26,6 +26,13 @@
             "passCodeAsStdin": false,
             "passCodeAsFile": true,
             "timeout": 20000
+        },
+        "GM3": {
+            "scriptPath": "http_gateway/python_gateway/lch_gateway_cli.py",
+            "commandTemplate": "python {scriptPath} {args}",
+            "passCodeAsStdin": true,
+            "passCodeAsFile": false,
+            "timeout": 3000
         }
     }
 }

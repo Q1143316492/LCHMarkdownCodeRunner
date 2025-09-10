@@ -3,3 +3,17 @@ dist
 node_modules
 .vscode-test/
 *.vsix
+
+# Python
+__pycache__/
+*.pyc
+env/
+venv/
+.venv/
+*.pyo
+*.pyd
+.Python
+env.bak/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
