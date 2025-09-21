@@ -14,6 +14,14 @@ For example, given the following content in a Markdown file:
 eval('print("Hello, World!")')
 ```
 
+this has been rendered as python code block. you need to wrap it with \`\`\`python \`\`\` in your file like this:
+
+\`\`\`python
+#GM[port=8080, debug=true]
+eval('print("Hello, World!")')
+\`\`\`
+
+
 And the following in your `settings.json`:
 
 ```json
