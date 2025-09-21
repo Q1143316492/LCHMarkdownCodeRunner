@@ -110,4 +110,30 @@ print("Hello, World!")
 1 / 0
 ──────────────────────────────
 Executing: python http_gateway/python_gateway/lch_gateway_cli.py 9090 gcc
+
+🟦🟦🟦 BEGIN lch_gateway_cli.py 🟦🟦🟦
+
+🚩  Python Markdown Runner
+🟢 Args:
+    ['http_gateway/python_gateway/lch_gateway_cli.py', '9090', 'gcc']
+
+⭐ Markdown Code Content:
+a = 1
+b = 2
+print(a + b)
+print("Hello, World!")
+1 / 0
+
+⭐ Result:
+Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+  File "<string>", line 5, in <module>
+ZeroDivisionError: division by zero
+
+
+🟦🟦🟦 END 🟦🟦🟦
+
+──────────────────────────────────────────────────
+Process exited with code: 0
+✅ Execution completed successfully
 ```
